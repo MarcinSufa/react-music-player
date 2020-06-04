@@ -65,10 +65,8 @@ src: local('Gilroy-Regular'), url(${GirloyRegular}) format('woff');
 `;
 
 export const StyledWrapper = styled.div`
-    min-height: 100vh;
+    /* min-height: 100vh; */
     display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    background-color: ${theme.colors.secondary};
+    /* flex-direction: column; */
+    /* align-items: center; */
 `;
