@@ -22,6 +22,7 @@ const TopNavbar = styled.div`
     justify-content: space-between;
     background-color: transparent;
     width: 100%;
+    padding: 1rem 2rem;
 `;
 
 const TextLink = styled.p`

@@ -4,12 +4,17 @@ import concert_background from '../images/bg_image.jpg';
 import back_icon from '../images/back_ico.svg';
 
 import Navbar from '../components/Navbar/Navbar';
+import Slider from '../components/slider/Slider';
+import TitleMiddle from '../components/texts/titleMiddle/TitleMiddle';
+import PlayerNav from '../components/player/navigation/PlayerNav';
 
 const MusicApp = () => {
     return (
         <MainWrapper>
             <Navbar />
-            <p>Hello world</p>
+            <Slider />
+            <TitleMiddle />
+            <PlayerNav />
         </MainWrapper>
     );
 };
@@ -22,7 +27,6 @@ const MainWrapper = styled.section`
     background-color: ${(props) => props.theme.colors.secondary};
     width: 100%;
     height: 700px;
-    padding: 1rem 2rem;
 
     &:before {
         content: ' ';
@@ -32,7 +36,6 @@ const MainWrapper = styled.section`
         top: 0;
         width: 100%;
         height: 30%;
-        z-index: 1;
         opacity: 0.1;
         background-image: url(${concert_background});
         background-repeat: no-repeat;
