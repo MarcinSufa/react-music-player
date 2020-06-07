@@ -12,19 +12,24 @@ import { data } from '../utils/data/data';
 
 const MusicApp = () => {
     const [musicData, setMusicData] = useState(data);
-    const [activeAlbumId, setActiveAlbumId] = useState(3);
+    const [activeAlbumId, setActiveAlbumId] = useState(0);
     const [activeAlbum, setActiveAlbum] = useState({});
     const [activeSong, setActiveSong] = useState({});
 
     useEffect(() => {
-        const pickedAlbum = musicData.find((m) => m.id === activeAlbumId);
-        setActiveAlbum(pickedAlbum);
-        setActiveSong(pickedAlbum.song_list[0]);
-    }, [activeAlbumId]);
+        updateActiveAlbum(musicData);
+    }, [activeAlbumId, activeSong]);
 
     const slideClicked = (event, id) => {
         event.preventDefault();
         setActiveAlbumId(id);
+        updateActiveAlbum(musicData);
+    };
+
+    const updateActiveAlbum = (musicData) => {
+        const pickedAlbum = musicData.find((m) => m.id === activeAlbumId);
+        setActiveAlbum(pickedAlbum);
+        setActiveSong(pickedAlbum.song_list[0]);
     };
 
     return (

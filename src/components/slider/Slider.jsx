@@ -9,26 +9,15 @@ import styled from 'styled-components';
 
 import Play from '../../images/usertive_logo.svg';
 
-const Slider = ({ musicList, activeAlbumId, setActiveAlbum }) => {
-    const [albumId, setAlbumId] = useState(2);
-
-    const changeSlideHandler = (event) => {
-        setAlbumId(event);
-        // setActiveAlbum(event, albumId);
-    };
-
+const Slider = ({ musicList, setActiveAlbum }) => {
     return (
         <SliderWrapper>
             <ActiveIcon />
             <SliderMain
-                value={albumId}
                 centered
                 infinite
+                keepDirectionWhenDragging
                 clickToChange
-                onChange={(event) => {
-                    changeSlideHandler(event);
-                    console.log(event, 'onChange event');
-                }}
                 slidesPerPage={2}
                 slides={musicList.map((slide) => {
                     return (
