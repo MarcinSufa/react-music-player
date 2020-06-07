@@ -52,6 +52,7 @@ src: local('Gilroy-Regular'), url(${GirloyRegular}) format('woff');
         padding: 0;
         margin: 0;
         width: 100vw;
+        height: 100vh;
         overflow-x: hidden;
         font-family: 'Gilroy-Regular';
     }
@@ -61,12 +62,17 @@ src: local('Gilroy-Regular'), url(${GirloyRegular}) format('woff');
         
     }
 
+    #root {
+        margin: 0 auto;
+                /* display: flex;
+        justify-content:center; */
+    }
 
 `;
 
 export const StyledWrapper = styled.div`
-    /* min-height: 100vh; */
+    min-height: 100vh;
     display: flex;
-    /* flex-direction: column; */
-    /* align-items: center; */
+    flex-direction: column;
+    align-items: center;
 `;

@@ -29,6 +29,7 @@ const MusicApp = () => {
 
     useEffect(() => {
         updateActiveAlbum(musicData);
+        // updateTotalSongTime(activeSong.duration);
     }, [activeAlbumId]);
 
     const slideClicked = (event, id) => {
@@ -61,8 +62,6 @@ const MusicApp = () => {
         return totalMili;
     };
 
-    // const timer = trackTimePlay;
-
     const startTimer = () => {
         console.log('timer');
         setTimerStop(false);
@@ -91,7 +90,6 @@ const MusicApp = () => {
     const toggleNextSong = () => {
         stopTimer();
         resetTimer();
-
         const currentIndex = activeSong.id;
         let nextIndex = currentIndex + 1;
         if (activeAlbum.song_list.length === currentIndex) {
@@ -110,7 +108,6 @@ const MusicApp = () => {
         if (currentIndex === 1) {
             nextIndex = activeAlbum.song_list.length;
         }
-
         const newPrevSong = activeAlbum.song_list.find((s) => s.id === nextIndex);
         setActiveSong(newPrevSong);
         updateTotalSongTime(activeSong.duration);
@@ -120,7 +117,7 @@ const MusicApp = () => {
         const time = convertTimeToMilis(track);
         setTotalTrackTime(time);
     };
-    // console.log(millisToMinutesAndSeconds(0));
+
     return (
         <MainWrapper>
             <Navbar album={activeAlbum.album} openMenu={() => toggleMenu()} />
@@ -157,11 +154,11 @@ const MuiDrawer = styled(Drawer)`
 `;
 
 const TimeStart = styled.div`
-    color: red;
+    color: ${(props) => props.theme.colors.text_secondary};
 `;
 
 const TimeEnd = styled.div`
-    color: red;
+    color: ${(props) => props.theme.colors.text_secondary};
 `;
 
 const MainWrapper = styled.section`
@@ -169,8 +166,14 @@ const MainWrapper = styled.section`
     flex-direction: column;
     background-color: ${(props) => props.theme.colors.secondary};
     width: 100%;
-    height: 100vh;
-    position: relative;
+    height: 100%;
+
+    align-self: center;
+    @media (min-width: 800px) {
+        position: relative;
+        max-height: 800px;
+        max-width: 600px;
+    }
 
     &:before {
         content: ' ';
@@ -193,10 +196,13 @@ const AudioTrack = styled(SliderMui)`
     && {
         color: ${(props) => props.theme.colors.seledin};
         width: 80%;
+        margin: 0 1rem;
     }
 `;
 
 const AudioWrapper = styled.div`
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
 `;
