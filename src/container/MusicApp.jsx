@@ -8,6 +8,8 @@ import Slider from '../components/slider/Slider';
 import TitleMiddle from '../components/texts/titleMiddle/TitleMiddle';
 import PlayerNav from '../components/player/navigation/PlayerNav';
 
+import { data } from '../utils/data/data';
+
 const MusicApp = () => {
     return (
         <MainWrapper>

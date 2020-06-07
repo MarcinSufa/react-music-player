@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Carousel, { Dots } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 
@@ -10,20 +10,31 @@ import cover3 from '../../images/unreleased_cover.png';
 import Play from '../../images/usertive_logo.svg';
 
 const Slider = () => {
+    const buttonRef = useRef();
+
     return (
         <SliderWrapper>
             <ActiveIcon />
-            <SliderMain centered infinite clickToChange slidesPerPage={2}>
-                <Slide>
-                    <Cover src={cover1} />
-                </Slide>
-                <Slide>
-                    <Cover src={cover2} />
-                </Slide>
-                <Slide>
-                    <Cover src={cover3} />
-                </Slide>
-            </SliderMain>
+            <SliderMain
+                centered
+                infinite
+                clickToChange
+                slidesPerPage={2}
+                slides={[
+                    <Slide
+                        onClick={() => {
+                            console.log(buttonRef.current);
+                        }}
+                        ref={buttonRef}>
+                        <Cover src={cover1} />
+                    </Slide>,
+                    <Slide>
+                        <Cover src={cover2} />
+                    </Slide>,
+                    <Slide>
+                        <Cover src={cover3} />
+                    </Slide>,
+                ]}></SliderMain>
         </SliderWrapper>
     );
 };
@@ -37,6 +48,7 @@ const Cover = styled.img`
 
 const Slide = styled.div`
     /* margin-top: 2rem; */
+    transform: scale3d(0.76, 0.76, 0.76);
 `;
 
 const SliderMain = styled(Carousel)`
