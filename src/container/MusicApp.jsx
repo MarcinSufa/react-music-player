@@ -9,6 +9,8 @@ import Slider from '../components/slider/Slider';
 import TitleMiddle from '../components/texts/titleMiddle/TitleMiddle';
 import PlayerNav from '../components/player/navigation/PlayerNav';
 import SideDrawer from '../components/sideDrawer/SideDrawer';
+import BottomNavbar from '../components/bottomNavbar/BottomNavbar';
+import AlbumList from '../components/albumList/AlbumList';
 
 import { data } from '../utils/data/data';
 
@@ -18,6 +20,7 @@ const MusicApp = () => {
     const [activeAlbum, setActiveAlbum] = useState({});
     const [activeSong, setActiveSong] = useState({});
     const [sideMenu, toggleSideMenu] = useState(false);
+    const [bottomMenu, toggleBottomMenu] = useState(false);
 
     useEffect(() => {
         updateActiveAlbum(musicData);
@@ -48,6 +51,10 @@ const MusicApp = () => {
             <MuiDrawer anchor='right' width='100vw' open={sideMenu} onClose={() => toggleSideMenu(!sideMenu)}>
                 <SideDrawer openMenu={() => toggleMenu()} src={activeAlbum.cover} song={activeSong} artist={activeAlbum.artist}></SideDrawer>
             </MuiDrawer>
+            <MuiDrawer anchor='bottom' width='80vw' open={bottomMenu} onClose={() => toggleBottomMenu(!bottomMenu)}>
+                <AlbumList album={activeAlbum.song_list} openMenu={() => toggleBottomMenu(!bottomMenu)} />
+            </MuiDrawer>
+            <BottomNavbar album={activeAlbum.album} openMenu={() => toggleBottomMenu(!bottomMenu)} />
         </MainWrapper>
     );
 };
@@ -69,7 +76,8 @@ const MainWrapper = styled.section`
     flex-direction: column;
     background-color: ${(props) => props.theme.colors.secondary};
     width: 100%;
-    height: 700px;
+    height: 100vh;
+    position: relative;
 
     &:before {
         content: ' ';

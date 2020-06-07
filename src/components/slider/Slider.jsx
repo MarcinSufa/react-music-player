@@ -3,10 +3,6 @@ import Carousel, { Dots } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 
 import styled from 'styled-components';
-// import cover1 from '../../images/cover-1.png';
-// import cover2 from '../../images/cover.png';
-// import cover3 from '../../images/unreleased_cover.png';
-
 import Play from '../../images/usertive_logo.svg';
 
 const Slider = ({ musicList, setActiveAlbum }) => {
