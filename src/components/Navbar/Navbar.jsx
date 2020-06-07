@@ -4,12 +4,12 @@ import BackIcon from '../icons/backIcon/BackIcon';
 import HamburgerIcon from '../icons/hamburgerIcon/HamburgerIcon';
 import TitleTop from '../texts/titleTop/TitleTop';
 
-const Navbar = ({ album }) => {
+const Navbar = ({ album, openMenu }) => {
     return (
         <TopNavbar>
             <BackIcon />
             <TitleTop album={album} />
-            <HamburgerIcon />
+            <HamburgerIcon openMenu={() => openMenu()} />
         </TopNavbar>
     );
 };
@@ -22,7 +22,9 @@ const TopNavbar = styled.div`
     justify-content: space-between;
     background-color: transparent;
     width: 100%;
+    height: 80px;
     padding: 1rem 2rem;
+    z-index: 10;
 `;
 
 const TextLink = styled.p`

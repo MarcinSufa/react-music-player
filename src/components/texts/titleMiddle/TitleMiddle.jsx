@@ -28,13 +28,13 @@ const Title = styled.div`
 const Song = styled.h2`
     font-size: 1.5rem;
     margin: 0.2rem;
-    font-style: ${(props) => props.theme.font_style.bold};
+    font-family: ${(props) => props.theme.font_style.bold};
     color: ${(props) => props.theme.colors.white};
 `;
 
 const Artist = styled.h3`
     font-size: 0.8rem;
     margin: 0.2rem;
-    color: ${(props) => props.theme.font_style.light};
+    font-family: ${(props) => props.theme.font_style.light};
     color: ${(props) => props.theme.colors.text_secondary};
 `;

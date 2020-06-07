@@ -60,7 +60,7 @@ const ActiveIcon = styled.div`
     top: 50%;
     width: 50px;
     height: 50px;
-    z-index: 9999;
+    z-index: 15;
     /* opacity: 0.1; */
     background-image: url(${Play});
     background-repeat: no-repeat;

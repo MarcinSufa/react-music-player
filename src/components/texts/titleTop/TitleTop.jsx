@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const TitleTop = ({ album }) => {
     return (
         <Title>
-            <AlbumHeader>ALBUM</AlbumHeader>
+            <AlbumHeader> {album && 'ALBUM'}</AlbumHeader>
             <AlbumName> {album} </AlbumName>
         </Title>
     );
@@ -26,7 +26,7 @@ const TitleElement = styled.h3`
 `;
 
 const AlbumHeader = styled(TitleElement)`
-    font-style: ${(props) => props.theme.font_style.light};
+    font-family: ${(props) => props.theme.font_style.light};
     color: ${(props) => props.theme.colors.primary};
 `;
 

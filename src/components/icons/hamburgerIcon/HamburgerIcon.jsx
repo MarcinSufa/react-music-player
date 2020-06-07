@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import More_Ico from '../../../images/more_ico.svg';
 import Button from '../button/Button';
 
-const HamburgerIcon = () => {
-    return <HamIcon />;
+const HamburgerIcon = ({ openMenu }) => {
+    return <HamIcon onClick={(event) => openMenu()} />;
 };
 
 export default HamburgerIcon;

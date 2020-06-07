@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import concert_background from '../images/bg_image.jpg';
 import back_icon from '../images/back_ico.svg';
+import Drawer from '@material-ui/core/Drawer';
 
 import Navbar from '../components/Navbar/Navbar';
 import Slider from '../components/slider/Slider';
 import TitleMiddle from '../components/texts/titleMiddle/TitleMiddle';
 import PlayerNav from '../components/player/navigation/PlayerNav';
+import SideDrawer from '../components/sideDrawer/SideDrawer';
 
 import { data } from '../utils/data/data';
 
@@ -15,6 +17,7 @@ const MusicApp = () => {
     const [activeAlbumId, setActiveAlbumId] = useState(0);
     const [activeAlbum, setActiveAlbum] = useState({});
     const [activeSong, setActiveSong] = useState({});
+    const [sideMenu, toggleSideMenu] = useState(false);
 
     useEffect(() => {
         updateActiveAlbum(musicData);
@@ -32,17 +35,34 @@ const MusicApp = () => {
         setActiveSong(pickedAlbum.song_list[0]);
     };
 
+    const toggleMenu = () => {
+        toggleSideMenu(!sideMenu);
+    };
+
     return (
         <MainWrapper>
-            <Navbar album={activeAlbum.album} />
+            <Navbar album={activeAlbum.album} openMenu={() => toggleMenu()} />
             <Slider musicList={musicData} activeAlbumId={activeAlbumId} setActiveAlbum={(event, id) => slideClicked(event, id)} />
             <TitleMiddle song={activeSong} artist={activeAlbum.artist} />
             <PlayerNav />
+            <MuiDrawer anchor='right' width='100vw' open={sideMenu} onClose={() => toggleSideMenu(!sideMenu)}>
+                <SideDrawer openMenu={() => toggleMenu()} src={activeAlbum.cover} song={activeSong} artist={activeAlbum.artist}></SideDrawer>
+            </MuiDrawer>
         </MainWrapper>
     );
 };
 
 export default MusicApp;
+
+const MuiDrawer = styled(Drawer)`
+    && {
+        .MuiDrawer-paper {
+            background: transparent;
+            backdrop-filter: grayscale(1.5) opacity(0.8);
+            background-color: ${(props) => props.theme.colors.secondary_rgba};
+        }
+    }
+`;
 
 const MainWrapper = styled.section`
     display: flex;
