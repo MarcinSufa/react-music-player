@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import concert_background from '../images/bg_image.jpg';
 import back_icon from '../images/back_ico.svg';
@@ -11,10 +11,24 @@ import PlayerNav from '../components/player/navigation/PlayerNav';
 import { data } from '../utils/data/data';
 
 const MusicApp = () => {
+    const [musicData, setMusicData] = useState(data);
+    const [activeAlbumId, setActiveAlbumId] = useState(3);
+    const [activeAlbum, setActiveAlbum] = useState({});
+
+    useEffect(() => {
+        const pickedAlbum = musicData.find((m) => m.id === activeAlbumId);
+        setActiveAlbum(pickedAlbum);
+    }, [activeAlbumId]);
+
+    const slideClicked = (event, id) => {
+        event.preventDefault();
+        setActiveAlbumId(id);
+    };
+
     return (
         <MainWrapper>
-            <Navbar />
-            <Slider />
+            <Navbar album={activeAlbum.album} />
+            <Slider musicList={musicData} activeAlbumId={activeAlbumId} setActiveAlbum={(event, id) => slideClicked(event, id)} />
             <TitleMiddle />
             <PlayerNav />
         </MainWrapper>

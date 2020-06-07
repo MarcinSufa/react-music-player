@@ -4,11 +4,11 @@ import BackIcon from '../icons/backIcon/BackIcon';
 import HamburgerIcon from '../icons/hamburgerIcon/HamburgerIcon';
 import TitleTop from '../texts/titleTop/TitleTop';
 
-const Navbar = () => {
+const Navbar = ({ album }) => {
     return (
         <TopNavbar>
             <BackIcon />
-            <TitleTop />
+            <TitleTop album={album} />
             <HamburgerIcon />
         </TopNavbar>
     );

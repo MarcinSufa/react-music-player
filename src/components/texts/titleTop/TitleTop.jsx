@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const TitleTop = () => {
+const TitleTop = ({ album }) => {
     return (
         <Title>
             <AlbumHeader>ALBUM</AlbumHeader>
-            <AlbumName> Unreleased </AlbumName>
+            <AlbumName> {album} </AlbumName>
         </Title>
     );
 };

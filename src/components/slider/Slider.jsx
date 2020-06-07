@@ -1,40 +1,46 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Carousel, { Dots } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 
 import styled from 'styled-components';
-import cover1 from '../../images/cover-1.png';
-import cover2 from '../../images/cover.png';
-import cover3 from '../../images/unreleased_cover.png';
+// import cover1 from '../../images/cover-1.png';
+// import cover2 from '../../images/cover.png';
+// import cover3 from '../../images/unreleased_cover.png';
 
 import Play from '../../images/usertive_logo.svg';
 
-const Slider = () => {
-    const buttonRef = useRef();
+const Slider = ({ musicList, activeAlbumId, setActiveAlbum }) => {
+    const [albumId, setAlbumId] = useState(2);
+
+    const changeSlideHandler = (event) => {
+        setAlbumId(event);
+        // setActiveAlbum(event, albumId);
+    };
 
     return (
         <SliderWrapper>
             <ActiveIcon />
             <SliderMain
+                value={albumId}
                 centered
                 infinite
                 clickToChange
+                onChange={(event) => {
+                    changeSlideHandler(event);
+                    console.log(event, 'onChange event');
+                }}
                 slidesPerPage={2}
-                slides={[
-                    <Slide
-                        onClick={() => {
-                            console.log(buttonRef.current);
-                        }}
-                        ref={buttonRef}>
-                        <Cover src={cover1} />
-                    </Slide>,
-                    <Slide>
-                        <Cover src={cover2} />
-                    </Slide>,
-                    <Slide>
-                        <Cover src={cover3} />
-                    </Slide>,
-                ]}></SliderMain>
+                slides={musicList.map((slide) => {
+                    return (
+                        <Slide
+                            key={slide.id}
+                            onClick={(event) => {
+                                setActiveAlbum(event, slide.id);
+                            }}>
+                            <Cover src={slide.cover} />
+                        </Slide>
+                    );
+                })}></SliderMain>
         </SliderWrapper>
     );
 };
