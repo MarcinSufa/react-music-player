@@ -27,6 +27,7 @@ const BottomNav = styled.div`
     height: 4rem;
     width: 100%;
     background-color: ${(props) => props.theme.colors.white};
+    z-index: 5;
 `;
 
 const NavInner = styled.div`

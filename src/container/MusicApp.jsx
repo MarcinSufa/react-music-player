@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import concert_background from '../images/bg_image.jpg';
 import back_icon from '../images/back_ico.svg';
 import Drawer from '@material-ui/core/Drawer';
+import SliderMui from '@material-ui/core/Slider';
 
 import Navbar from '../components/Navbar/Navbar';
 import Slider from '../components/slider/Slider';
@@ -11,6 +12,7 @@ import PlayerNav from '../components/player/navigation/PlayerNav';
 import SideDrawer from '../components/sideDrawer/SideDrawer';
 import BottomNavbar from '../components/bottomNavbar/BottomNavbar';
 import AlbumList from '../components/albumList/AlbumList';
+import WaveForm from '../components/waveForm/WaveForm';
 
 import { data } from '../utils/data/data';
 
@@ -55,6 +57,10 @@ const MusicApp = () => {
                 <AlbumList album={activeAlbum.song_list} openMenu={() => toggleBottomMenu(!bottomMenu)} />
             </MuiDrawer>
             <BottomNavbar album={activeAlbum.album} openMenu={() => toggleBottomMenu(!bottomMenu)} />
+            <AudioWrapper>
+                <AudioTrack valueLabelDisplay={true} />
+            </AudioWrapper>
+            <WaveForm />
         </MainWrapper>
     );
 };
@@ -94,4 +100,16 @@ const MainWrapper = styled.section`
         background-size: cover;
         filter: grayscale(100%) brightness(1.5);
     }
+`;
+
+const AudioTrack = styled(SliderMui)`
+    && {
+        color: ${(props) => props.theme.colors.seledin};
+        width: 80%;
+    }
+`;
+
+const AudioWrapper = styled.div`
+    display: flex;
+    justify-content: center;
 `;
