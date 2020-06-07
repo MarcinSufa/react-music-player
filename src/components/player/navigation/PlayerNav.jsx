@@ -9,14 +9,14 @@ import play_active from '../../../images/Play_active.png';
 import next_icon from '../../../images/next_ico.svg';
 import repeat_icon from '../../../images/repeat_ico.svg';
 
-const PlayerNav = () => {
+const PlayerNav = ({ prev, next, play, stop }) => {
     return (
         <PayerNavbar>
             <Shuffle />
-            <Prev />
-            <PlayActive />
-            <Next />
-            <Repeat />
+            <Prev onClick={() => prev()} />
+            <PlayActive onClick={() => play()} />
+            <Next onClick={() => next()} />
+            <Repeat onClick={() => stop()} />
         </PayerNavbar>
     );
 };

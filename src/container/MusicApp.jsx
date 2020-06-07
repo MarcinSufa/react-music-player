@@ -23,10 +23,13 @@ const MusicApp = () => {
     const [activeSong, setActiveSong] = useState({});
     const [sideMenu, toggleSideMenu] = useState(false);
     const [bottomMenu, toggleBottomMenu] = useState(false);
+    const [totalTrackTime, setTotalTrackTime] = useState(5000);
+    const [trackTimePlay, setTrackTimePlay] = useState(0);
+    const [timerStop, setTimerStop] = useState(false);
 
     useEffect(() => {
         updateActiveAlbum(musicData);
-    }, [activeAlbumId, activeSong]);
+    }, [activeAlbumId]);
 
     const slideClicked = (event, id) => {
         event.preventDefault();
@@ -44,12 +47,86 @@ const MusicApp = () => {
         toggleSideMenu(!sideMenu);
     };
 
+    const millisToMinutesAndSeconds = (millis) => {
+        const minutes = Math.floor(millis / 60000);
+        const seconds = ((millis % 60000) / 1000).toFixed(0);
+        return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+    };
+
+    const convertTimeToMilis = (time) => {
+        const [minutes, seconds] = time.split(':');
+        const minutesMili = parseInt(minutes) * 60;
+        const secondsMili = parseInt(seconds);
+        const totalMili = (minutesMili + secondsMili) * 1000;
+        return totalMili;
+    };
+
+    // const timer = trackTimePlay;
+
+    const startTimer = () => {
+        console.log('timer');
+        setTimerStop(false);
+        let totalTimePlayed = 0;
+        const interval2 = setInterval(() => {
+            totalTimePlayed = totalTimePlayed + 1000;
+            setTrackTimePlay((trackTimePlay) => trackTimePlay + 1000);
+            console.log(totalTimePlayed, 'totalTimePlayed');
+            if (totalTimePlayed >= 5000) {
+                clearInterval(interval2);
+                return;
+            }
+            if (timerStop) {
+                clearInterval(interval2);
+                return;
+            }
+        }, 1000);
+    };
+    const stopTimer = () => {
+        setTimerStop(true);
+    };
+    const resetTimer = () => {
+        setTrackTimePlay(0);
+    };
+
+    const toggleNextSong = () => {
+        stopTimer();
+        resetTimer();
+
+        const currentIndex = activeSong.id;
+        let nextIndex = currentIndex + 1;
+        if (activeAlbum.song_list.length === currentIndex) {
+            nextIndex = 1;
+        }
+        const newSong = activeAlbum.song_list.find((s) => s.id === nextIndex);
+        setActiveSong(newSong);
+        updateTotalSongTime(activeSong.duration);
+    };
+
+    const togglePrevSong = () => {
+        stopTimer();
+        resetTimer();
+        const currentIndex = activeSong.id;
+        let nextIndex = currentIndex - 1;
+        if (currentIndex === 1) {
+            nextIndex = activeAlbum.song_list.length;
+        }
+
+        const newPrevSong = activeAlbum.song_list.find((s) => s.id === nextIndex);
+        setActiveSong(newPrevSong);
+        updateTotalSongTime(activeSong.duration);
+    };
+
+    const updateTotalSongTime = (track) => {
+        const time = convertTimeToMilis(track);
+        setTotalTrackTime(time);
+    };
+    // console.log(millisToMinutesAndSeconds(0));
     return (
         <MainWrapper>
             <Navbar album={activeAlbum.album} openMenu={() => toggleMenu()} />
             <Slider musicList={musicData} activeAlbumId={activeAlbumId} setActiveAlbum={(event, id) => slideClicked(event, id)} />
             <TitleMiddle song={activeSong} artist={activeAlbum.artist} />
-            <PlayerNav />
+            <PlayerNav prev={() => togglePrevSong()} next={() => toggleNextSong()} play={() => startTimer()} stop={() => stopTimer()} />
             <MuiDrawer anchor='right' width='100vw' open={sideMenu} onClose={() => toggleSideMenu(!sideMenu)}>
                 <SideDrawer openMenu={() => toggleMenu()} src={activeAlbum.cover} song={activeSong} artist={activeAlbum.artist}></SideDrawer>
             </MuiDrawer>
@@ -58,7 +135,9 @@ const MusicApp = () => {
             </MuiDrawer>
             <BottomNavbar album={activeAlbum.album} openMenu={() => toggleBottomMenu(!bottomMenu)} />
             <AudioWrapper>
-                <AudioTrack valueLabelDisplay={true} />
+                <TimeStart>{millisToMinutesAndSeconds(trackTimePlay)}</TimeStart>
+                <AudioTrack />
+                <TimeEnd>{millisToMinutesAndSeconds(totalTrackTime)} </TimeEnd>
             </AudioWrapper>
             <WaveForm />
         </MainWrapper>
@@ -75,6 +154,14 @@ const MuiDrawer = styled(Drawer)`
             background-color: ${(props) => props.theme.colors.secondary_rgba};
         }
     }
+`;
+
+const TimeStart = styled.div`
+    color: red;
+`;
+
+const TimeEnd = styled.div`
+    color: red;
 `;
 
 const MainWrapper = styled.section`

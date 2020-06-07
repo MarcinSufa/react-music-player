@@ -37,7 +37,7 @@ class Waveform extends Component {
 
         return (
             <WaveformContianer>
-                <PlayButton onClick={this.handlePlay}>{!this.state.playing ? 'Play' : 'Pause'}</PlayButton>
+                {/* <PlayButton onClick={this.handlePlay}>{!this.state.playing ? 'Play' : 'Pause'}</PlayButton> */}
                 <Wave id='waveform' />
                 // <audio id='track' src={url} />
             </WaveformContianer>
