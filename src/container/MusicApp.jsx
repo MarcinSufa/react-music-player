@@ -14,10 +14,12 @@ const MusicApp = () => {
     const [musicData, setMusicData] = useState(data);
     const [activeAlbumId, setActiveAlbumId] = useState(3);
     const [activeAlbum, setActiveAlbum] = useState({});
+    const [activeSong, setActiveSong] = useState({});
 
     useEffect(() => {
         const pickedAlbum = musicData.find((m) => m.id === activeAlbumId);
         setActiveAlbum(pickedAlbum);
+        setActiveSong(pickedAlbum.song_list[0]);
     }, [activeAlbumId]);
 
     const slideClicked = (event, id) => {
@@ -29,7 +31,7 @@ const MusicApp = () => {
         <MainWrapper>
             <Navbar album={activeAlbum.album} />
             <Slider musicList={musicData} activeAlbumId={activeAlbumId} setActiveAlbum={(event, id) => slideClicked(event, id)} />
-            <TitleMiddle />
+            <TitleMiddle song={activeSong} artist={activeAlbum.artist} />
             <PlayerNav />
         </MainWrapper>
     );

@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const TitleMiddle = () => {
+const TitleMiddle = ({ song, artist }) => {
     return (
         <Title>
-            <Song>Self Conscious</Song>
-            <Artist> KAYNE WEST </Artist>
+            <Song>{song.name}</Song>
+            <Artist> {artist} </Artist>
         </Title>
     );
 };

@@ -1,4 +1,4 @@
-import { playlist } from './playlist';
+import { playlist, playlistFreshmen, playlistSteel } from './playlists';
 import cover1 from '../../images/cover-1.png';
 import cover2 from '../../images/cover.png';
 import cover3 from '../../images/unreleased_cover.png';
@@ -8,7 +8,7 @@ export const data = [
         id: 1,
         album: 'Steel Panther',
         artist: 'FEEL THE STEEL',
-        song_list: playlist,
+        song_list: playlistSteel,
         cover: cover2,
     },
     {
@@ -22,7 +22,7 @@ export const data = [
         id: 3,
         album: 'Freshmen Adjustment',
         artist: 'KAYNE WEST',
-        song_list: playlist,
+        song_list: playlistFreshmen,
         cover: cover1,
     },
 ];
